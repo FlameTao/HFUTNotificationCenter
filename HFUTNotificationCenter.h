@@ -14,7 +14,9 @@ typedef NS_ENUM(NSInteger, NotificationType) {
     HFUTNotificationInfo
 };
 
-@interface HFUTNotificationCenter : UIViewController
+@interface HFUTNotificationCenter: UIViewController
+
+typedef void (^PreBlock)(void);
 
 + (HFUTNotificationCenter*)notificationWithTitle:(NSString*)title Type:(NotificationType)type;
 
@@ -23,6 +25,15 @@ typedef NS_ENUM(NSInteger, NotificationType) {
 @property (nonatomic, strong) UIImageView *markView;
 @property (nonatomic, strong) UILabel *notificationMessage;
 
+@property (nonatomic, strong) PreBlock preBlock;
+@property (nonatomic, strong) PreBlock aftBlock;
+
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeUpForDestroy;
+@property (nonatomic, strong) UITapGestureRecognizer *tapOnceForDestroy;
+
 - (void)show;
 - (void)destroy;
+
+- (void)setPreBlock:(PreBlock)preBlock;
+- (void)setAftBlock:(PreBlock)aftBlock;
 @end
